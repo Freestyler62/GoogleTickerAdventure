@@ -4,7 +4,7 @@ Created on Sun Jun 28 18:23:47 2015
 
 @author: Bobster
 
-This is my first serious python project. The aim is to be able to develop a utility that can extract real
+This is another serious Python project. The aim is to be able to develop a utility that can extract real
 time stocks/shares information from the internet. Or in other words a share price tracker.
 """
 print 'Hello there. Welcome to Varghese Ltd. This is the stocks/share price tracker.'
