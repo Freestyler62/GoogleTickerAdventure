@@ -47,11 +47,10 @@ def combine(ticker):
     return output
     ticker = "NASDAQ:AAPL"
 
-# Remove a file, if exist
-os.path.exists(fname) and os.remove(fname)
+
 freq = 600  # Fetch data every 600 sec (10 min)
 
-with open(fname,'a') as f:
+with open(fname, 'a') as f:
     writer = csv.writer(f, dialect="excel")
     while(t.tm_hour <= 16):
         if(t.tm_hour == 16):
