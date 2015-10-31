@@ -57,23 +57,23 @@ if __name__ == '__main__':
     print(time.ctime())
     print
 
-    freq = 2  # Fetch data every 600 sec (10 min)
+    delay_between_calls = 2  # Fetch data every 600 sec (10 min)
 
-    with open(output_filename, 'a') as f:
-        writer = csv.writer(f, dialect="excel")
+    with open(output_filename, 'a') as output_file:
+        writer = csv.writer(output_file, dialect="excel")
         while(t.tm_hour <= 16):
             t = time.localtime()
             if(t.tm_hour == 16):
                 while(t.tm_min < 01):
-                    data = make_csv_row(ticker)
-                    print(data)
-                    writer.writerow(data)  # Save data in the file
-                    time.sleep(freq)
+                    row_data = make_csv_row(ticker)
+                    print(row_data)
+                    writer.writerow(row_data)  # Save data in the file
+                    time.sleep(delay_between_calls)
                 else:
                     break
             else:
                 for ticker in tickers:
-                    data = make_csv_row(ticker)
-                    print(data)
-                    writer.writerow(data)  # Save data in the file
-                    time.sleep(freq)
+                    row_data = make_csv_row(ticker)
+                    print(row_data)
+                    writer.writerow(row_data)  # Save data in the file
+                    time.sleep(delay_between_calls)
