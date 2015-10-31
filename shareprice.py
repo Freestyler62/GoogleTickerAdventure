@@ -62,6 +62,7 @@ if __name__ == '__main__':
     with open(output_filename, 'a') as f:
         writer = csv.writer(f, dialect="excel")
         while(t.tm_hour <= 16):
+            t = time.localtime()
             if(t.tm_hour == 16):
                 while(t.tm_min < 01):
                     data = make_csv_row(ticker)
