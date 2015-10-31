@@ -52,13 +52,7 @@ if __name__ == '__main__':
     # Define file name of the output record
     output_filename = "aapl.dat"
 
-    # Display time corresponding to your location
-    print(time.ctime())
-    print
-     
-    # Set local time zone to NYC
-    os.environ['TZ'] = 'America/New_York'
-    time.tzset()
+    # Display the time
     t = time.localtime()  # String
     print(time.ctime())
     print
