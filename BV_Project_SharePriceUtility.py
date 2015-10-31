@@ -31,6 +31,7 @@ time.tzset()
 t=time.localtime() # string
 print(time.ctime())
 print
+
 def combine(ticker):
     quote=fetchGF(ticker) # use the core-engine function
     t=time.localtime()    # grasp the moment of time
@@ -38,7 +39,8 @@ def combine(ticker):
             t.tm_min,t.tm_sec,ticker,quote]
     return output
     ticker="NASDAQ:AAPL"
-    # define file name of the output record
+    
+# define file name of the output record
 fname="aapl.dat"
 # remove a file, if exist
 os.path.exists(fname) and os.remove(fname)
