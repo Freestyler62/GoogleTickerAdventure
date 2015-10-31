@@ -11,18 +11,25 @@ print 'Hello there. Welcome to Varghese Ltd. This is the stocks/share price trac
 
 # TODO: Use the 'requests' library instead of urllib to fetch the data
 import urllib, time, os, re, csv
+import requests
 
+def fetchGF(ticker):
+    "Get a quote from Google Finance for the ticker."
 
-def fetchGF(googleticker):
     url = "http://www.google.com/finance?&q="
-    txt = urllib.urlopen(url + googleticker).read()
-    k = re.search('id="ref_(.*?)">(.*?)<', txt)
-    if k:
-        tmp = k.group(2)
-        q = tmp.replace(',', '')
+    response = requests.get(url + ticker)
+    if response.status_code != 200:
+        raise requests.ConnectionError("HTTP response is not 200")
+    html_content = response.content
+    
+    regexp = re.search('id="ref_(.*?)">(.*?)<', html_content)
+    if regexp:
+        tmp = regexp.group(2)
+        quote = tmp.replace(',', '')
     else:
-        q = "Nothing found for: " + googleticker
-    return q
+        quote = "Nothing found for: " + googleticker
+    
+    return quote
 
 
 def combine(ticker):
