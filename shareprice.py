@@ -61,19 +61,17 @@ if __name__ == '__main__':
 
     with open(output_filename, 'a') as output_file:
         writer = csv.writer(output_file, dialect="excel")
-        while(t.tm_hour <= 16):
+
+        while True:
+
+            for ticker in tickers:
+                row_data = make_csv_row(ticker)
+                print(row_data)
+                writer.writerow(row_data)  # Save data in the file
+                time.sleep(delay_between_calls)
+
             t = time.localtime()
-            if(t.tm_hour == 16):
-                while(t.tm_min < 01):
-                    row_data = make_csv_row(ticker)
-                    print(row_data)
-                    writer.writerow(row_data)  # Save data in the file
-                    time.sleep(delay_between_calls)
-                else:
-                    break
-            else:
-                for ticker in tickers:
-                    row_data = make_csv_row(ticker)
-                    print(row_data)
-                    writer.writerow(row_data)  # Save data in the file
-                    time.sleep(delay_between_calls)
+
+            if t.tm_hour >= 16 and t.tm_min > 5:
+                print "Time's up! Exiting..."
+                break
