@@ -11,6 +11,8 @@ print 'Hello there. Welcome to Varghese Ltd. This is the stocks/share price trac
 
 import urllib, time, os, re, csv
  
+tickers = ["AAPL"]
+
 def fetchGF(googleticker):
     url="http://www.google.com/finance?&q="
     txt=urllib.urlopen(url+googleticker).read()
@@ -59,7 +61,7 @@ with open(fname,'a') as f:
                 break
         else:
             for ticker in tickers:
-            data=combine(ticker)
-            print(data)
-            writer.writerow(data) # save data in the file
-            time.sleep(freq)
+                data=combine(ticker)
+                print(data)
+                writer.writerow(data) # save data in the file
+                time.sleep(freq)
