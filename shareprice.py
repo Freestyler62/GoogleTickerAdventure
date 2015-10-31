@@ -9,11 +9,11 @@ time stocks/shares information from the internet. Or in other words a share pric
 """
 print 'Hello there. Welcome to Varghese Ltd. This is the stocks/share price tracker.'
 
-# TODO: Use the 'requests' library instead of urllib to fetch the data
-import urllib, time, os, re, csv
+import time, os, re, csv
 import requests
 
-def fetchGF(ticker):
+
+def fetch_quote(ticker):
     "Get a quote from Google Finance for the ticker."
 
     url = "http://www.google.com/finance?&q="
@@ -32,13 +32,14 @@ def fetchGF(ticker):
     return quote
 
 
-def combine(ticker):
-    quote = fetchGF(ticker)  # Use the core-engine function
+def make_csv_row(ticker):
+    "Output a list that includes time and quote info."
+
+    quote = fetch_quote(ticker)  # Use the core-engine function
     t = time.localtime()     # Grasp the moment of time
     output = [t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour,  # Build a list
               t.tm_min, t.tm_sec, ticker, quote]
     return output
-    ticker = "NASDAQ:AAPL"
 
 
 if __name__ == '__main__':
@@ -66,7 +67,7 @@ if __name__ == '__main__':
         while(t.tm_hour <= 16):
             if(t.tm_hour == 16):
                 while(t.tm_min < 01):
-                    data = combine(ticker)
+                    data = make_csv_row(ticker)
                     print(data)
                     writer.writerow(data)  # Save data in the file
                     time.sleep(freq)
@@ -74,7 +75,7 @@ if __name__ == '__main__':
                     break
             else:
                 for ticker in tickers:
-                    data = combine(ticker)
+                    data = make_csv_row(ticker)
                     print(data)
                     writer.writerow(data)  # Save data in the file
                     time.sleep(freq)
