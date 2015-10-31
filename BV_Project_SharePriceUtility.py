@@ -63,4 +63,3 @@ with open(fname,'a') as f:
             print(data)
             writer.writerow(data) # save data in the file
             time.sleep(freq)
- f.close()
